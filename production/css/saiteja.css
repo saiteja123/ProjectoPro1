@@ -1,0 +1,61 @@
+.banner {
+    background-color: #2D9AB7;
+    background-image: url(../images/bg.png);
+    height: 350px;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.parallax {
+    color: #FFFFFF;
+    text-align: center;
+    padding-right: 100px;
+    padding-left:100px;
+    padding-top: 110px;
+    letter-spacing: 2px;
+    margin-top: 0px;
+}
+.parallax_description {
+    color: #FFFFFF;
+    text-align: center;
+    padding-right: 100px;
+    padding-left: 100px;
+    padding-top: 30px;
+    letter-spacing: 2px;
+    margin-top: 0px;
+
+}
+.bgimage{
+    background-image: url(../images/bg.png);
+    height: 650px;
+
+}
+
+.charts,
+.percent {
+    display: inline-block
+}
+
+.stats .charts {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center
+}
+.stats .charts canvas {
+    position: absolute;
+    top: 0;
+    left: 0
+}
+.stats .percent {
+    line-height: 110px;
+    z-index: 2;
+    font-size: 18px
+}
+.stats .percent:after {
+    content: '%';
+    margin-left: .1em;
+    font-size: .8em
+}
