@@ -23,13 +23,16 @@ if($desig=="admin")
 $_SESSION['login_user']=$username;
 redirect_to("Admin_Dashboard.php");
 }
-else if($desig=="Manager")
+else if($desig=="manager")
 {
-    redirect_to("Manager_Dashboard.html");
+    $_SESSION['login_user']=$username;
+    redirect_to("Manager_Dashboard.php");
 }
 else if($desig=="Employee")
+
 {
-    redirect_to("Employee_Dashboard.html");
+    $_SESSION['login_user']=$username;
+    redirect_to("Employee_Dashboard.php");
 }
 else
 redirect_to("error_Page.html");

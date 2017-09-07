@@ -27,6 +27,8 @@ session_start();
    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
    <!-- Custom Theme Style -->
    <link href="../build/css/custom.min.css" rel="stylesheet">
+
+
 </head>
 <body class="nav-md">
 <div class="container body">
@@ -61,7 +63,7 @@ session_start();
       <div class="col-md-3 left_col">
          <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-               <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>ProjectoPro</span></a>
+               <a href="Home_Page.html" class="site_title"><i class="fa fa-paw"></i> <span>ProjectoPro</span></a>
             </div>
             <div class="clearfix"></div>
             <!-- menu profile quick info -->
@@ -79,29 +81,32 @@ session_start();
                   <h3>General</h3>
                   <ul class="nav side-menu">
                      <li><a href="Admin_Dashboard.php"><i class="fa fa-home"></i> Home </a></li>
-                     <li><a href="projects.php"><i class="fa fa-edit"></i> Projects </a></li>
+                     <li><a href="Projects.php"><i class="fa fa-edit"></i> Projects </a></li>
                      <li><a href="calendar.html"><i class="fa fa-calendar"></i> Calendar </a></li>
                      <li><a><i class="fa fa-bug"></i> Bugs & Issues </a></li>
                      <li><a><i class="fa fa-book"></i> Knowledge Base </a></li>
-                     <li><a><i class="fa fa-users"></i> Stake Holders </a></li>
+                     <li><a href="stake_holder.php"><i class="fa fa-users"></i> Stake Holders </a></li>
                   </ul>
                </div>
             </div>
          </div>
       </div>
+
+
+
       <!-- page content -->
-      <div class="right_col" role="main">
-         <div class="">
+      <div class="right_col hideIt" role="main">
+         <div class="row">
+           <div class="cont">
             <div class="page-title">
                <div class="title_left">
                   <h3>Projects <small>Listing design</small></h3>
                </div>
-
             </div>
             <div class="clearfix"></div>
             <div class="row">
-               <div class="col-md-12">
-                  <div class="x_panel">
+               <div class="col-md-12 panel1">
+                  <div class="x_panel" >
                      <div class="x_title">
                         <h2>Projects</h2>
                         <ul class="nav navbar-right panel_toolbox">
@@ -140,7 +145,7 @@ session_start();
                                                            <td>
                                                               <a><?php echo $row["project_name"];   ?></a>
                                                               <br />
-                                                              <small>Created 01.01.2015</small>
+
                                                            </td>
                                                            <td><?php
                                                            $query1="select Team_members from project_members where Pid='$Pid';";
@@ -187,11 +192,347 @@ session_start();
                            </tbody>
                         </table>
                         <!-- end project list -->
+
+
                      </div>
                   </div>
                </div>
+                <div class="col-md-12"><div class="btn btn-success" id="CreateProject1">Create New Project</div>
+                </div>
             </div>
          </div>
+
+
+
+
+
+        <div class="container desc hidden" id="CreateProject" >
+
+              <form class="well form-horizontal" id="create" >
+                  <fieldset>
+                      <!-- Form Name -->
+                      <legend>
+                          <center>
+                              <h2><b>Create Project</b></h2>
+                          </center>
+                      </legend>
+                      <br>
+                      <section>
+                          <div class="row">
+                              <div class="col-md-12">
+
+                                  <!-- Project ID-->
+                                  <div class="form-group">
+                                      <label class="col-md-2 control-label">Project ID</label>
+                                      <div class="col-md-10 inputGroupContainer">
+                                          <div class="input-group col-md-11">
+                                              <input  name="Project_ID" placeholder="Project ID" class="form-control"  type="text" required>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!--Project Title-->
+                                  <div class="form-group">
+                                      <label class="col-md-2 control-label" >Project Title</label>
+                                      <div class="col-md-10 inputGroupContainer">
+                                          <div class="input-group col-md-11">
+
+                                              <input name="Project_Title" placeholder="Project Title" class="form-control"  type="text" required>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <!-- Description-->
+                                  <div class="form-group">
+                                      <label class="col-md-2 control-label">Description</label>
+                                      <div class="col-md-10 inputGroupContainer">
+                                          <div class="input-group col-md-11">
+                                              <textarea name="description" class="form-control" placeholder="description" rows="2" required></textarea>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <!-- Problem statement -->
+                                  <div class="form-group">
+                                      <label class="col-md-2 control-label">Problem Statement</label>
+                                      <div class="col-md-10 inputGroupContainer">
+                                          <div class="input-group col-md-11">
+                                              <textarea  name="problem_statement" class="form-control" placeholder="Problem Statement" rows="1" required></textarea>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <!-- Project Goal-->
+                                  <div class="form-group">
+                                      <label class="col-md-2 control-label">Project Goal</label>
+                                      <div class="col-md-10 inputGroupContainer">
+                                          <div class="input-group col-md-11">
+                                              <textarea name="project_Goal" class="form-control" placeholder="Project Goal" rows="1" required></textarea>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <!-- Objectives-->
+                                  <div class="form-group obj">
+                                      <label class="col-md-2 control-label" >Objectives</label>
+                                      <div class="col-md-10 inputGroupContainer">
+                                          <div class="input-group col-md-11">
+                                          <div class="row row1">
+                                              <div class="col-md-11" style="padding-bottom: 10px;">
+                                              <input name="objective[]" placeholder="Type Here" class="form-control name_list"  type="text" required></div>
+                                              <div class="col-md-1">
+                                                  <button type="button" class="fa fa-plus" id="obj"></button>
+                                              </div>
+
+                                          </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <!-- Modules-->
+                                  <div class="form-group mod">
+                                      <label class="col-md-2 control-label" >Modules</label>
+                                      <div class="col-md-10 inputGroupContainer">
+                                          <div class="input-group col-md-11">
+                                              <div class="row row2">
+                                                  <div class="col-md-11" style="padding-bottom: 10px;">
+                                                      <input name="module[]" placeholder="Type Here" class="form-control name_list"  type="text" required ></div>
+                                                  <div class="col-md-1">
+                                                      <button type="button" class="fa fa-plus" id="mod"></button>
+                                                  </div>
+
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+
+                                  <!-- Requirements -->
+                                  <div class="form-group req">
+                                      <label class="col-md-2 control-label" >Requirements</label>
+                                      <div class="col-md-10 inputGroupContainer">
+                                          <div class="input-group col-md-11">
+                                              <div class="row row3">
+                                                  <div class="col-md-11" style="padding-bottom: 10px;">
+                                                      <input name="requirement[]" placeholder="Type Here" class="form-control name_list"  type="text" required ></div>
+                                                  <div class="col-md-1">
+                                                      <button type="button" class="fa fa-plus" id="req"></button>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <!-- Scope-->
+                                  <div class="form-group">
+                                      <label class="col-md-2 control-label">Scope</label>
+                                      <div class="col-md-10 selectContainer">
+                                          <div class="input-group">
+                                              <div class="row">
+                                                  <div class="col-md-3">
+                                                      <label>From</label>
+                                                  </div>
+
+                                                  <div class="col-md-3">
+                                                      <input name="From" type="date" placeholder="From" required>
+                                                  </div>
+                                                  <div class="clearfix" style="padding-bottom: 10px;padding-top: 10px;"></div>
+                                                  <div class="col-md-3">
+                                                      <label>To</label>
+                                                  </div>
+                                                  <div class="col-md-3">
+                                                      <input name="To" type="date" placeholder="From" required>
+                                                  </div>
+
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+
+                                  <!--Budget-->
+                                  <div class="form-group bud">
+                                      <label class="col-md-2 control-label" >Budget</label>
+                                      <div class="col-md-10 inputGroupContainer">
+                                          <div class="input-group col-md-11">
+                                              <div class="row">
+                                                  <div class="col-md-12" style="padding-bottom: 10px;">
+                                                      <input name="Budget" placeholder="Budget" class="form-control"  type="text" required></div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group bud">
+                                      <label class="col-md-2 control-label" >Project Type</label>
+                                      <div class="col-md-10 inputGroupContainer">
+                                          <div class="input-group col-md-11">
+                                              <div class="row">
+                                                  <div class="col-md-12">
+                                                  <select name="Type" class="form-control selectpicker">
+                                                      <option value="">---</option>
+                                                      <option value="Front End">Android</option>
+                                                      <option value="Back End">Web</option>
+                                                      <option value="Database">IOT</option>
+                                                  </select>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+
+                              </div>
+                          </div>
+                          <div class="form-group">
+                                  <label class="col-md-12 control-label"></label>
+                                  <div class="submit col-md-12"><br>
+                                      <button  type="button" id="submit" name="submit_form" value="submit" class="btn btn-warning" >Create <span class="glyphicon glyphicon-send"></span></button>
+                                  </div>
+
+                          </div>
+
+
+                      </section>
+
+
+                  </fieldset>
+              </form>
+
+          </div>
+
+
+
+             <div class="members hidden" id="members">
+                 <div class="">
+                     <div class="panel panel-default" >
+                         <div class="panel-heading">
+                             <h3 align="center" class="panel-title">Choose Members For The Project</h3>
+                         </div>
+                         <div class="panel-body">
+                             <div class="panel-default">
+                                 <div class="panel-heading"><h3>Admin</h3></div>
+                                 <div class="panel-body">
+                                     <div class="container">
+                                         <table  class="table table-striped text-center" id="table">
+                                             <thead>
+                                             <tr>
+                                                 <th class='col-md-2 text-center'>UID</th>
+                                                 <th class='col-md-3 text-center'>Username</th>
+                                                 <th class='col-md-2 text-center'>Gender</th>
+                                                 <th class='col-md-3 text-center'>Department</th>
+                                                 <th class='col-md-2 text-center'><input type="button" value="select all" id="selectall1"></th>
+                                             </tr>
+                                             </thead>
+                                             <tbody id="tbody1">
+
+                                             <?php
+                                             require "init.php";
+                                             $query="select UID,Gender,Uname,Department,Contact from user_info where Designation='admin'";
+                                             $result=mysqli_query($con,$query);
+                                             while( $row = mysqli_fetch_array($result) )
+                                             {
+                                                 echo "<tr>";
+                                                 echo "<td class='col-md-2'>".$row['UID']."</td>";
+                                                 echo "<td class='col-md-3'>".$row['Uname']."</td>";
+                                                 echo "<td class='col-md-2'>".$row['Gender']."</td>";
+                                                 echo "<td class='col-md-3'>".$row['Department']."</td>";
+                                                 echo "<td class='col-md-2'><input type='checkbox' name='admin[]' value='".$row['Uname']."'></td>";
+                                                 echo "</tr>\n";
+                                             }
+                                             ?>
+                                             </tbody>
+                                         </table>
+                                     </div>
+                                 </div>
+                             </div>
+
+                             <div class="panel-default">
+                                 <div class="panel-heading"><h3>Manager</h3></div>
+                                 <div class="panel-body">
+                                     <div class="container">
+                                         <table  class="table table-striped text-center" id="table2" >
+                                             <thead>
+                                             <tr>
+                                                 <th class='col-md-2 text-center'>S.no</th>
+                                                 <th class='col-md-3 text-center'>Username</th>
+                                                 <th class='col-md-2 text-center'>Gender</th>
+                                                 <th class='col-md-3 text-center'>Department</th>
+                                                 <th class='col-md-2 text-center'><input type="button" value="select all" id="selectall2"></th>
+                                             </tr>
+                                             </thead>
+                                             <tbody id="tbody2">
+
+                                             <?php
+                                             require "init.php";
+                                             $query="select UID,Uname,Gender,Department,Contact from user_info where Designation='manager'";
+                                             $result=mysqli_query($con,$query);
+                                             while( $row = mysqli_fetch_array($result) )
+                                             {
+                                                 echo "<tr>";
+                                                 echo "<td class='col-md-2'>".$row['UID']."</td>";
+                                                 echo "<td class='col-md-3'>".$row['Uname']."</td>";
+                                                 echo "<td class='col-md-2'>".$row['Gender']."</td>";
+                                                 echo "<td class='col-md-3'>".$row['Department']."</td>";
+                                                 echo "<td class='col-md-2'><input type='checkbox' name='manager[]' value='".$row['Uname']."'></td>";
+                                                 echo "</tr>\n";
+                                             }
+                                             ?>
+                                             </tbody>
+                                         </table>
+                                     </div>
+                                 </div>
+                             </div>
+
+
+
+                             <div class="panel-default">
+                                 <div class="panel-heading"><h3>Employee</h3></div>
+                                 <div class="panel-body">
+                                     <div class="container">
+                                         <table  class="table table-striped text-center" id="table3 ">
+                                             <thead>
+                                             <tr>
+                                                 <th class='col-md-2 text-center'>S.no</th>
+                                                 <th class='col-md-3 text-center'>Username</th>
+                                                 <th class='col-md-2 text-center'>Gender</th>
+                                                 <th class='col-md-3 text-center'>Department</th>
+                                                 <th class='col-md-2 text-center'><input type="button" value="select all" id="selectall3"></th>
+                                             </tr>
+                                             </thead>
+                                             <tbody id="tbody3">
+
+                                             <?php
+                                             require "init.php";
+                                             $query="select UID,Uname,Gender,Department,Contact from user_info where Designation='employee'";
+                                             $result=mysqli_query($con,$query);
+                                             while( $row = mysqli_fetch_array($result) )
+                                             {
+                                                 echo "<tr>";
+                                                 echo "<td class='col-md-2'>".$row['UID']."</td>";
+                                                 echo "<td class='col-md-3'>".$row['Uname']."</td>";
+                                                 echo "<td class='col-md-2'>".$row['Gender']."</td>";
+                                                 echo "<td class='col-md-3'>".$row['Department']."</td>";
+                                                 echo "<td class='col-md-2'><input type='checkbox' name='employee[]' value='".$row['Uname']."'></td>";
+                                                 echo "</tr>\n";
+                                             }
+                                             ?>
+                                             </tbody>
+                                         </table>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+
+                     </div>
+                     <div align="center">
+                         <button  type="button" id="send" value="submit" name="send_members" class="btn btn-warning" >Send <span class="glyphicon glyphicon-send"></span></button>
+                     </div>
+
+
+
+                 </div>
+             </div>
+          </div>
       </div>
       <!-- /page content -->
    </div>
@@ -218,7 +559,9 @@ session_start();
 <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
 <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
 <script src="../vendors/moment/min/moment.min.js"></script>
+<script src="../vendors/validator/validator.js"></script>
 <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="../build/js/custom.min.js"></script>
+<script src="js/dash_script.js"></script>
 </body>
 </html>

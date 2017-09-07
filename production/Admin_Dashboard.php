@@ -50,7 +50,7 @@
                         <li><a href="calendar.html"><i class="fa fa-calendar"></i> Calendar </a></li>
                         <li><a><i class="fa fa-bug"></i> Bugs & Issues </a></li>
                         <li><a><i class="fa fa-book"></i> Knowledge Base </a></li>
-                        <li><a><i class="fa fa-users"></i> Stake Holders </a></li>
+                        <li><a href="stake_holder.php"><i class="fa fa-users"></i> Stake Holders </a></li>
                      </ul>
                   </div>
                </div>
@@ -67,7 +67,7 @@
                      <li class="col-lg-5">
                         <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 
-                           <img src="images/img.jpg" alt=""><span><?php echo $_SESSION["login_user"]; ?></span>
+                           <img src="images/img.jpg" alt=""><span><?php if(isset($_SESSION["login_user"])) echo $_SESSION["login_user"]; ?></span>
                            <span class=" fa fa-angle-down"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-usermenu pull-right">

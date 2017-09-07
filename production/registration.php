@@ -1,3 +1,7 @@
+<?php
+
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,9 +40,6 @@
         <br>
     </fieldset>
 
-<?php
-$username=$_POST["name"];
-$query="select * from user_info where Uname='$username';";
         <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
             </label>
@@ -46,7 +47,7 @@ $query="select * from user_info where Uname='$username';";
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="First Name <space> Last Name" required="required" type="text">
-                    <span><?php ?></span>
+                    <span class="error"><?php if(isset($_SESSION["uname_error"])){ echo $_SESSION["uname_error"];}?></span>
                 </div>
             </div>
         </div>
@@ -79,7 +80,7 @@ $query="select * from user_info where Uname='$username';";
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                    <input id="password" pattern="alphanumeric" type="password"  name="password" placeholder="Password" data-validate-length-range="6,12" class="form-control col-md-7 col-xs-12" required="required">
+                    <input id="password"  type="password"  name="password" placeholder="Password" data-validate-length-range="6,12" class="form-control col-md-7 col-xs-12" required="required">
                 </div>
                 <div class="tooltip help"><span><i>?</i></span></div>
             </div>
@@ -163,7 +164,6 @@ $query="select * from user_info where Uname='$username';";
 </div>
 
 
-
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
 <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
@@ -188,3 +188,8 @@ $query="select * from user_info where Uname='$username';";
 
 </body>
 </html>
+
+<?php
+  session_unset();
+    session_destroy();
+    ?>
