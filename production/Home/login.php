@@ -21,14 +21,14 @@ if($desig=="admin")
 
 
 $_SESSION['login_user']=$username;
-redirect_to("Admin_Dashboard.php");
+redirect_to("../Admin/Admin_Dashboard.php");
 }
 else if($desig=="manager")
 {
     $_SESSION['login_user']=$username;
-    redirect_to("Manager_Dashboard.php");
+    redirect_to("../Manager/Manager_Dashboard.php");
 }
-else if($desig=="Employee")
+else if($desig=="employee")
 
 {
     $_SESSION['login_user']=$username;

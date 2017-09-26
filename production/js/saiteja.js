@@ -39,3 +39,41 @@ function init_EasyPieChart() {
         })
     }
 }
+
+$(document).ready(function() {
+    $('.pane').on("click", "#Assign", function () {
+        $("#step-1").addClass("hidden");
+        $("#step-2").removeClass('hidden');
+    });
+
+    $('.pane').on("click", "#Review", function () {
+        $("#step-1").removeClass("hidden");
+        $("#step-2").addClass('hidden');
+    });
+
+
+
+    var i = 2;
+
+
+    $(".pane1").on("click", ".plus", function () {
+        var z = $(this).attr("id");
+        $('#cont'+z+'').find("div.row")
+            .append('<div id="row'+i+'">' +
+                    '   <div class="col-md-11">' +
+                    '       <input name="Task'+z+'[]" placeholder="Task" class="form-control tasks"  type="text" style="margin-left:15px; border: none; border-bottom: solid #e3e3e6 1px;box-shadow: none">' +
+                    '   </div>' +
+                    '   <div class="col-md-1">' +
+                    '       <button type="button" class="fa fa-minus btn_remove1" id="'+i+'" style="margin-top: 15px"></button>' +
+                    '   </div>' +
+                    '</div>');
+        i++;
+    });
+
+    $(document).on('click', '.btn_remove1', function () {
+        var button_id = $(this).attr("id");
+        $('#row' + button_id + '').remove();
+    });
+
+
+});

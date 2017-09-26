@@ -1,3 +1,7 @@
+<?php
+require "init.php";
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,17 +14,17 @@
     <title> ProjectoPro </title>
 
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="../../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- FullCalendar -->
-    <link href="../vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
-    <link href="../vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
+    <link href="../../vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="../../vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
 
     <!-- Custom styling plus plugins -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../../build/css/custom.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -29,13 +33,13 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>ProjectoPro</span></a>
+            <a href="../Home/Home_Page.html" class="site_title"><i class="fa fa-paw"></i> <span>ProjectoPro</span></a>
           </div>
           <div class="clearfix"></div>
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+              <img src="../images/img.jpg" alt="..." class="img-circle profile_img">
             </div>
 
           </div>
@@ -47,11 +51,11 @@
               <h3>General</h3>
               <ul class="nav side-menu">
                 <li><a href="Admin_Dashboard.php"><i class="fa fa-home"></i> Home </a></li>
-                <li><a href="Projects.php"><i class="fa fa-edit"></i> Projects </a></li>
-                <li><a href="calendar.html"><i class="fa fa-calendar"></i> Calendar </a></li>
+                <li><a href="a_Projects.php"><i class="fa fa-edit"></i> Projects </a></li>
+                <li><a href="a_calendar.php"><i class="fa fa-calendar"></i> Calendar </a></li>
                 <li><a><i class="fa fa-bug"></i> Bugs & Issues </a></li>
                 <li><a><i class="fa fa-book"></i> Knowledge Base </a></li>
-                <li><a href="stake_holder.php"><i class="fa fa-users"></i> Stake Holders </a></li>
+                <li><a href="a_stake_holder.php"><i class="fa fa-users"></i> Stake Holders </a></li>
               </ul>
             </div>
           </div>
@@ -65,9 +69,9 @@
               <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-              <li class="col-lg-5">
+              <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt=""><span><?php echo $_SESSION["login_user"]; ?></span>
+                  <img src="../images/img.jpg" alt=""><span><?php echo $_SESSION["login_user"]; ?></span>
                   <span class=" fa fa-angle-down"></span>
 
                 </a>
@@ -79,7 +83,7 @@
                     </a>
                   </li>
                   <li><a href="javascript:;">Help</a></li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  <li><a href="../Home/Logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
             </ul>
@@ -136,6 +140,14 @@
 
       </div>
       <!-- /page content -->
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                ProjectoPro
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
 
       <!-- calendar modal -->
       <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -217,19 +229,19 @@
 
 
   <!-- jQuery -->
-  <script src="../vendors/jquery/dist/jquery.min.js"></script>
+  <script src="../../vendors/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap -->
-  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- FastClick -->
-  <script src="../vendors/fastclick/lib/fastclick.js"></script>
+  <script src="../../vendors/fastclick/lib/fastclick.js"></script>
   <!-- NProgress -->
-  <script src="../vendors/nprogress/nprogress.js"></script>
+  <script src="../../vendors/nprogress/nprogress.js"></script>
   <!-- FullCalendar -->
-  <script src="../vendors/moment/min/moment.min.js"></script>
-  <script src="../vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+  <script src="../../vendors/moment/min/moment.min.js"></script>
+  <script src="../../vendors/fullcalendar/dist/fullcalendar.min.js"></script>
 
   <!-- Custom Theme Scripts -->
-  <script src="../build/js/custom.min.js"></script>
+  <script src="../../build/js/custom.min.js"></script>
 
   </body>
 </html>

@@ -53,7 +53,7 @@ $(document).ready(function() {
     var  Pid;
     $('body').on("click", "#submit", function (){
         $.ajax({
-            url: "name.php",
+            url: "project_details_insert.php",
             method: "POST",
             dataType:'json',
             data: $("#create").serialize(),
@@ -111,6 +111,7 @@ $(document).ready(function() {
         }
     });
 
+    var sender = $("#sender").val();
 
     $('body').on("click", "#send", function (){
 
@@ -119,7 +120,7 @@ $(document).ready(function() {
             url: "choose_members.php",
             method: "POST",
             dataType:"html",
-            data: {'Pid':Pid,'choked':$('#tbody1>tr>td>input:checked').serialize(),'choked1':$('#tbody2>tr>td>input:checked').serialize(),'choked2':$('#tbody3>tr>td>input:checked').serialize()},
+            data: {'Pid':Pid,'sender':sender,'choked':$('#tbody1>tr>td>input:checked').serialize(),'choked1':$('#tbody2>tr>td>input:checked').serialize(),'choked2':$('#tbody3>tr>td>input:checked').serialize()},
             success: function (data)
             {
                 $("div.members").replaceWith("<h3>Project created successfully</h3>");

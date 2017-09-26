@@ -2,6 +2,7 @@
 require "init.php";
 
 $Pid=$_POST['Pid'];
+$sender=$_POST['sender'];
 
 $choked=array();
 $choked1=array();
@@ -15,6 +16,8 @@ $count=count($choked["admin"]);
 $count1=count($choked1["manager"]);
 $count2=count($choked2["employee"]);
 
+$unread=true;
+
 
 if($count > 0)
 {
@@ -23,7 +26,10 @@ if($count > 0)
         if (trim($choked['admin'][$i] != ''))
         {
             $sql = "insert into project_members(Pid,Team_members)values('$Pid','" . mysqli_real_escape_string($con, $choked['admin'][$i]) . "')";
+            $notify1="insert into notifications(Nid,recepient,sender,unread,message,type) values(null,'".$choked['admin'][$i]."','$sender','$unread','new Project Invite','type')";
             mysqli_query($con, $sql);
+            mysqli_query($con, $notify1);
+
 
         }
     }
@@ -33,7 +39,9 @@ if($count > 0)
         if (trim($choked1['manager'][$i] != ''))
         {
             $sql1 = "insert into project_members(Pid,Team_members)values('$Pid','" . mysqli_real_escape_string($con, $choked1['manager'][$i]) . "')";
+            $notify2="insert into notifications(Nid,recepient,sender,unread,message,type) values(null,'".$choked1['manager'][$i]."','$sender','$unread','new Project Invite','type')";
             mysqli_query($con, $sql1);
+            mysqli_query($con, $notify2);
 
         }
     }
@@ -44,14 +52,16 @@ if($count > 0)
         if (trim($choked2['employee'][$i] != ''))
         {
             $sql2 = "insert into project_members(Pid,Team_members)values('$Pid','" . mysqli_real_escape_string($con, $choked2['employee'][$i]) . "')";
+            $notify3="insert into notifications(Nid,recepient,sender,unread,message,type) values(null,'".$choked2['employee'][$i]."','$sender','$unread','new Project Invite','type')";
             mysqli_query($con, $sql2);
+            mysqli_query($con, $notify3);
 
         }
     }
 
 
 
-    echo "insertion successful ".$Pid." ".$count+$count1+$count2;
+    echo "Project Created Successfully ";
 }
 
 

@@ -8,21 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Manager</title>
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="../../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- bootstrap-progressbar -->
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link href="../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
-    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <link href="../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
-    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../../build/css/custom.css" rel="stylesheet">
 </head>
 <body class="nav-md">
 <?php
@@ -33,7 +33,7 @@ session_start();
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>ProjectoPro</span></a>
+                    <a href="../Home/Home_Page.html" class="site_title"><i class="fa fa-paw"></i> <span>ProjectoPro</span></a>
                 </div>
                 <div class="clearfix"></div>
                 <!-- menu profile quick info -->
@@ -45,12 +45,12 @@ session_start();
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
-                            <li><a href="Admin_Dashboard.php"><i class="fa fa-home"></i> Home </a></li>
-                            <li><a href="Projects.php"><i class="fa fa-edit"></i> Projects </a></li>
-                            <li><a href="calendar.html"><i class="fa fa-calendar"></i> Calendar </a></li>
+                            <li><a href="Manager_Dashboard.php"><i class="fa fa-home"></i> Home </a></li>
+                            <li><a href="m_Projects.php"><i class="fa fa-edit"></i> Projects </a></li>
+                            <li><a href="m_calendar.php"><i class="fa fa-calendar"></i> Calendar </a></li>
                             <li><a><i class="fa fa-bug"></i> Bugs & Issues </a></li>
                             <li><a><i class="fa fa-book"></i> Knowledge Base </a></li>
-                            <li><a href="stake_holder.php"><i class="fa fa-users"></i> Stake Holders </a></li>
+                            <li><a href="m_stake_holder.php"><i class="fa fa-users"></i> Stake Holders </a></li>
                         </ul>
                     </div>
                 </div>
@@ -64,10 +64,10 @@ session_start();
                         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                     </div>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="col-lg-5">
+                        <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 
-                                <img src="images/img.jpg" alt=""><span><?php if(isset($_SESSION["login_user"])) echo $_SESSION["login_user"]; ?></span>
+                                <img src="../images/img.jpg" alt=""><span><?php if(isset($_SESSION["login_user"])) echo $_SESSION["login_user"]; ?></span>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -78,7 +78,7 @@ session_start();
                                     </a>
                                 </li>
                                 <li><a href="javascript:;">Help</a></li>
-                                <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                <li><a href="../Home/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -106,30 +106,30 @@ session_start();
 </div>
 
 
-<script src="../vendors/jquery/dist/jquery.min.js"></script>
-<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../vendors/fastclick/lib/fastclick.js"></script>
-<script src="../vendors/nprogress/nprogress.js"></script>
-<script src="../vendors/Chart.js/dist/Chart.min.js"></script>
-<script src="../vendors/gauge.js/dist/gauge.min.js"></script>
-<script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<script src="../vendors/iCheck/icheck.min.js"></script>
-<script src="../vendors/skycons/skycons.js"></script>
-<script src="../vendors/Flot/jquery.flot.js"></script>
-<script src="../vendors/Flot/jquery.flot.pie.js"></script>
-<script src="../vendors/Flot/jquery.flot.time.js"></script>
-<script src="../vendors/Flot/jquery.flot.stack.js"></script>
-<script src="../vendors/Flot/jquery.flot.resize.js"></script>
-<script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-<script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-<script src="../vendors/flot.curvedlines/curvedLines.js"></script>
-<script src="../vendors/DateJS/build/date.js"></script>
-<script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-<script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-<script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-<script src="../vendors/moment/min/moment.min.js"></script>
-<script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-<script src="../build/js/custom.min.js"></script>
+<script src="../../vendors/jquery/dist/jquery.min.js"></script>
+<script src="../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../vendors/fastclick/lib/fastclick.js"></script>
+<script src="../../vendors/nprogress/nprogress.js"></script>
+<script src="../../vendors/Chart.js/dist/Chart.min.js"></script>
+<script src="../../vendors/gauge.js/dist/gauge.min.js"></script>
+<script src="../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<script src="../../vendors/iCheck/icheck.min.js"></script>
+<script src="../../vendors/skycons/skycons.js"></script>
+<script src="../../vendors/Flot/jquery.flot.js"></script>
+<script src="../../vendors/Flot/jquery.flot.pie.js"></script>
+<script src="../../vendors/Flot/jquery.flot.time.js"></script>
+<script src="../../vendors/Flot/jquery.flot.stack.js"></script>
+<script src="../../vendors/Flot/jquery.flot.resize.js"></script>
+<script src="../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+<script src="../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+<script src="../../vendors/flot.curvedlines/curvedLines.js"></script>
+<script src="../../vendors/DateJS/build/date.js"></script>
+<script src="../../vendors/jqvmap/dist/jquery.vmap.js"></script>
+<script src="../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+<script src="../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+<script src="../../vendors/moment/min/moment.min.js"></script>
+<script src="../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="../../build/js/custom.min.js"></script>
 
 </body>
 </html>

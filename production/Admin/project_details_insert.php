@@ -36,7 +36,7 @@ if($modules > 0)
     {
         if (trim($_POST["objective"][$i] != ''))
         {
-            $sql2 = "insert into modules(Pid,Modules)values('$Pid','" . mysqli_real_escape_string($connect, $_POST["module"][$i]) . "')";
+            $sql2 = "insert into modules(Mid,Pid,Modules,Assigned_to,Start_date,End_date)values(null,'$Pid','" . mysqli_real_escape_string($connect, $_POST["module"][$i]) . "',null,null,null)";
             mysqli_query($connect, $sql2);
         }
     }
