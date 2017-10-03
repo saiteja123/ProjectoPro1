@@ -24,7 +24,7 @@ if($objectives > 0)
     {
         if (trim($_POST["objective"][$i] != ''))
         {
-            $sql1 = "insert into objectives(Pid,Objective)values('$Pid','" . mysqli_real_escape_string($connect, $_POST["objective"][$i]) . "')";
+            $sql1 = "insert into objectives(Pid,Objective)values('$Pid','".$_POST["objective"][$i]."')";
             mysqli_query($connect, $sql1);
         }
     }
@@ -36,7 +36,7 @@ if($modules > 0)
     {
         if (trim($_POST["objective"][$i] != ''))
         {
-            $sql2 = "insert into modules(Mid,Pid,Modules,Assigned_to,Start_date,End_date)values(null,'$Pid','" . mysqli_real_escape_string($connect, $_POST["module"][$i]) . "',null,null,null)";
+            $sql2 = "insert into modules(Mid,Pid,Modules,Assigned_to,Start_date,End_date)values(null,'$Pid','".$_POST["module"][$i]."',null,null,null)";
             mysqli_query($connect, $sql2);
         }
     }
@@ -48,7 +48,7 @@ if($requirements > 0)
     {
         if (trim($_POST["objective"][$i] != ''))
         {
-            $sql3 = "insert into requirements(Pid,Requirement)values('$Pid','" . mysqli_real_escape_string($connect, $_POST["requirement"][$i]) . "')";
+            $sql3 = "insert into requirements(Pid,Requirement)values('$Pid','".$_POST["requirement"][$i] . "')";
             mysqli_query($connect, $sql3);
         }
     }

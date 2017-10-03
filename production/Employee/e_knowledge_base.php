@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Manager</title>
+    <title>Admin</title>
 
     <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -19,14 +18,14 @@
 </head>
 <body class="nav-md">
 <?php
-require "init.php";
-session_start();
-$profile_query=mysqli_query($con,"select profile from user_info where Uname='".$_SESSION["login_user"]."'");
-while($profile_row=mysqli_fetch_assoc($profile_query))
-{
-    $profile=$profile_row["profile"];
-}
-?>
+   session_start();
+   require "init.php";
+   $profile_query=mysqli_query($con,"select profile from user_info where Uname='".$_SESSION["login_user"]."'");
+   while($profile_row=mysqli_fetch_assoc($profile_query))
+   {
+       $profile=$profile_row["profile"];
+   }
+   ?>
 <div class="container body">
     <div class="main_container">
         <div class="col-md-3 left_col">
@@ -44,12 +43,12 @@ while($profile_row=mysqli_fetch_assoc($profile_query))
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
-                            <li><a href="Manager_Dashboard.php"><i class="fa fa-home"></i> Home </a></li>
-                            <li><a href="m_Projects.php"><i class="fa fa-edit"></i> Projects </a></li>
-                            <li><a href="m_calendar.php"><i class="fa fa-calendar"></i> Calendar </a></li>
+                            <li><a href="Employee_Dashboard.php"><i class="fa fa-home"></i> Home </a></li>
+                            <li><a href="e_Projects.php"><i class="fa fa-edit"></i> Projects </a></li>
+                            <li><a href="e_calendar.php"><i class="fa fa-calendar"></i> Calendar </a></li>
                             <li><a><i class="fa fa-bug"></i> Bugs & Issues </a></li>
-                            <li><a href="m_knowledge_base.php"><i class="fa fa-book"></i> Knowledge Base </a></li>
-                            <li><a href="m_stake_holder.php"><i class="fa fa-users"></i> Stake Holders </a></li>
+                            <li><a href="e_knowledge_base.php"><i class="fa fa-book"></i> Knowledge Base </a></li>
+                            <li><a href="e_stake_holder.php"><i class="fa fa-users"></i> Stake Holders </a></li>
                         </ul>
                     </div>
                 </div>
@@ -82,9 +81,9 @@ while($profile_row=mysqli_fetch_assoc($profile_query))
                         </li>
 
                         <?php
-                        $notify_query=mysqli_query($con,"select * from notifications where recepient='".$_SESSION["login_user"]."'");
-                        $notify_num=mysqli_num_rows($notify_query);
-                        ?>
+                      $notify_query=mysqli_query($con,"select * from notifications where recepient='".$_SESSION["login_user"]."'");
+                      $notify_num=mysqli_num_rows($notify_query);
+                      ?>
 
                         <li role="presentation" class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
@@ -95,21 +94,21 @@ while($profile_row=mysqli_fetch_assoc($profile_query))
                             <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
 
                                 <?php
-                                $k=$notify_num;
-                                while($k>$notify_num-3&&$notiify_row=mysqli_fetch_assoc($notify_query))
+                              $k=$notify_num;
+                              while($k>$notify_num-3&&$notiify_row=mysqli_fetch_assoc($notify_query))
                                 {
-                                    ?>
-                                    <li>
-                                        <a>
-                                            <span><span>Sender:  </span><span><?php echo $notiify_row["sender"];?></span></span>
-                                            <span class="message"><?php echo $notiify_row["message"];?></span>
-                                        </a>
-                                    </li>
-
-                                    <?php
-                                    $k--;
-                                }
                                 ?>
+                                <li>
+                                    <a>
+                                        <span><span>Sender:  </span><span><?php echo $notiify_row["sender"];?></span></span>
+                                        <span class="message"><?php echo $notiify_row["message"];?></span>
+                                    </a>
+                                </li>
+
+                                <?php
+                                  $k--;
+                              }
+                              ?>
                                 <li>
                                     <div class="text-center">
                                         <a>
@@ -136,7 +135,7 @@ while($profile_row=mysqli_fetch_assoc($profile_query))
         <!-- footer content -->
         <footer>
             <div class="pull-right">
-                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                ProjectoPro
             </div>
             <div class="clearfix"></div>
         </footer>

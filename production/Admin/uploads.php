@@ -24,12 +24,12 @@ if (isset($_FILES['files']) && !empty($_FILES['files']))
         }
         if (file_exists('../uploads/' . $_FILES["files"]["name"][$i]))
         {
-            $errors[]= 'File already exists : uploads/' . $_FILES["files"]["name"][$i];
+            $errors[]= 'File already exists : ../uploads/' . $_FILES["files"]["name"][$i];
         }
         if(empty($errors)==true)
         {
-            move_uploaded_file($_FILES["files"]["tmp_name"][$i], 'uploads/' . $_FILES["files"]["name"][$i]);
-            echo 'File successfully uploaded : uploads/' . $_FILES["files"]["name"][$i] . ' ';
+            move_uploaded_file($_FILES["files"]["tmp_name"][$i], '../uploads/' . $_FILES["files"]["name"][$i]);
+            echo 'File successfully uploaded : ../uploads/' . $_FILES["files"]["name"][$i] . ' ';
             $query=mysqli_query($con,"insert into file_uploads(Pid,file_id,file_name,file_type) values('$Pid',null,'".$_FILES["files"]["name"][$i]."','".$_FILES["files"]["type"][$i]."');");
         }
         else

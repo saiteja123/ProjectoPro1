@@ -1,29 +1,26 @@
 <?php
 require "init.php";
 session_start();
+$profile_query=mysqli_query($con,"select profile from user_info where Uname='".$_SESSION["login_user"]."'");
+while($profile_row=mysqli_fetch_assoc($profile_query))
+{
+    $profile=$profile_row["profile"];
+}
 ?>
-
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!-- Meta, title, CSS, favicons, etc. -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>ProjectoPro | View Project</title>
 
-        <!-- Bootstrap -->
         <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Font Awesome -->
         <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <!-- NProgress -->
         <link href="../../vendors/nprogress/nprogress.css" rel="stylesheet">
-        <!-- iCheck -->
         <link href="../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
-        <!-- Custom Theme Style -->
         <link href="../../build/css/custom.css" rel="stylesheet">
     </head>
 
@@ -44,7 +41,6 @@ session_start();
                         <div class="profile_pic">
                             <img src="../images/img.jpg" alt="..." class="img-circle profile_img">
                         </div>
-
                     </div>
                     <!-- /menu profile quick info -->
 
@@ -57,13 +53,12 @@ session_start();
                             <ul class="nav side-menu">
                                 <li><a href="Manager_Dashboard.php"><i class="fa fa-home"></i> Home </a></li>
                                 <li><a href="m_Projects.php"><i class="fa fa-edit"></i> Projects </a></li>
-                                <li><a href="../Admin/a_calendar.php"><i class="fa fa-calendar"></i> Calendar </a></li>
+                                <li><a href="../Manager/m_calendar.php"><i class="fa fa-calendar"></i> Calendar </a></li>
                                 <li><a><i class="fa fa-bug"></i> Bugs & Issues </a></li>
-                                <li><a><i class="fa fa-book"></i> Knowledge Base </a></li>
-                                <li><a href="../Admin/a_stake_holder.php"><i class="fa fa-users"></i> Stake Holders </a></li>
+                                <li><a href="m_knowledge_base.php"><i class="fa fa-book"></i> Knowledge Base </a></li>
+                                <li><a href="../Manager/m_stake_holder.php"><i class="fa fa-users"></i> Stake Holders </a></li>
                             </ul>
                         </div>
-
                     </div>
                     <!-- /sidebar menu -->
                 </div>
@@ -76,12 +71,11 @@ session_start();
                         <div class="nav toggle">
                             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                         </div>
-
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                    aria-expanded="false">
-                                    <img src="../images/img.jpg" alt=""><span><?php echo $_SESSION["login_user"]; ?></span>
+                                    <img src="../profiles/<?php echo $profile;?>" alt="Not Found" onerror=this.src="../images/alt_profile.png"><span><?php echo $_SESSION["login_user"]; ?></span>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -93,6 +87,45 @@ session_start();
                                     </li>
                                     <li><a href="javascript:;">Help</a></li>
                                     <li><a href="../Home/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                </ul>
+                            </li>
+                            <?php
+                            $notify_query=mysqli_query($con,"select * from notifications where recepient='".$_SESSION["login_user"]."'");
+                            $notify_num=mysqli_num_rows($notify_query);
+                            ?>
+
+                            <li role="presentation" class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green"><?php echo $notify_num?></span>
+                                </a>
+
+                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+
+                                    <?php
+                                    $k=$notify_num;
+                                    while($k>$notify_num-3&&$notiify_row=mysqli_fetch_assoc($notify_query))
+                                    {
+                                        ?>
+                                        <li>
+                                            <a>
+                                                <span><span>Sender:  </span><span><?php echo $notiify_row["sender"];?></span></span>
+                                                <span class="message"><?php echo $notiify_row["message"];?></span>
+                                            </a>
+                                        </li>
+
+                                        <?php
+                                        $k--;
+                                    }
+                                    ?>
+                                    <li>
+                                        <div class="text-center">
+                                            <a>
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
                                 </ul>
                             </li>
 
@@ -128,6 +161,7 @@ session_start();
                         <div class="pane" style="width:100%;text-align:center;margin-left: auto; margin-right: auto;margin-bottom: 15px">
                             <button type="button" class="btn btn-round btn-primary" style="width:125px;" id="Review">Review</button>
                            <span><button type="button" class="btn btn-round btn-primary" style="width:125px;" id="Assign">Assign</button></span>
+                            <span><button type="button" class="btn btn-round btn-primary" style="width:125px;" id="Perform">Perform</button></span>
                         </div>
 
                             <div id="step-1">
@@ -172,10 +206,31 @@ session_start();
 
                                                 <br/>
 
+                                                <?php
+                                                $chart_data='';
+                                                $q0=mysqli_query($con,"select Mid from modules where Pid='$Pid'");
+                                                $p=0;
+                                                while($q0_row=mysqli_fetch_assoc($q0))
+                                                {
+                                                    $q1=mysqli_query($con,"select Tid from tasks where Pid='$Pid' and Mid='".$q0_row["Mid"]."'");
+                                                    $q2=mysqli_query($con,"select Tid from tasks where Pid='$Pid' and Mid='".$q0_row["Mid"]."' and stat=1");
+
+                                                    $q1_count=mysqli_num_rows($q1);
+                                                    $q2_count=mysqli_num_rows($q2);
+
+                                                    $comp = ($q2_count / $q1_count) * 100;
+                                                    $chart_data .="{module:'module$p',percentage:$comp},";
+                                                    $p++;
+                                                }
+                                                $chart_data=substr($chart_data,0,-1);
+
+
+                                                ?>
+
                                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                                     <div class="x_panel">
                                                         <div class="x_title">
-                                                            <h2>Bar Charts</h2>
+                                                            <h2>Statistics</h2>
                                                             <ul class="nav navbar-right panel_toolbox">
                                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                                                             </ul>
@@ -313,19 +368,39 @@ session_start();
                                                         <br/>
                                                         <h5>Project files</h5>
                                                         <ul class="list-unstyled project_files">
-                                                            <li><a href=""><i class="fa fa-file-word-o"></i>
-                                                                    Functional-requirements.docx</a>
-                                                            </li>
-                                                            <li><a href=""><i class="fa fa-file-pdf-o"></i> UAT.pdf</a>
-                                                            </li>
-                                                            <li><a href=""><i class="fa fa-mail-forward"></i>
-                                                                    Email-from-flatbal.mln</a>
-                                                            </li>
-                                                            <li><a href=""><i class="fa fa-picture-o"></i> Logo.png</a>
-                                                            </li>
-                                                            <li><a href=""><i class="fa fa-file-word-o"></i>
-                                                                    Contract-10_12_2014.docx</a>
-                                                            </li>
+                                                        <?php
+                                                        $file_query=mysqli_query($con,"select file_name,file_type from file_uploads where Pid='$Pid'");
+                                                        while($file_row=mysqli_fetch_assoc($file_query))
+                                                        {
+                                                            if(isset($file_row['file_name']))
+                                                            {
+                                                             if($file_row['file_type']=="image/jpeg")
+                                                             {
+                                                                 echo "<li>"."<a href='uploads/".$file_row["file_name"]."' target='_blank'>"."<i class='fa fa-picture-o'>"."</i>".$file_row["file_name"]."</a>";
+                                                             }
+                                                             if($file_row['file_type']=="image/png")
+                                                             {
+
+                                                             }
+                                                             if($file_row['file_type']=="application/pdf")
+                                                             {
+                                                                 echo "<li>"."<a href='uploads/".$file_row["file_name"]."' target='_blank'>"."<i class='fa fa-file-pdf-o'>"."</i>".$file_row["file_name"]."</a>";
+                                                             }
+                                                             if($file_row['file_type']=="application/msword")
+                                                             {
+                                                                 echo "<li>"."<a href='uploads/".$file_row["file_name"]."' target='_blank'>"."<i class='fa fa-file-word-o'>"."</i>".$file_row["file_name"]."</a>";
+                                                             }
+                                                             if($file_row['file_type']=="pdf")
+                                                             {
+
+                                                             }
+                                                             else
+                                                             {
+
+                                                             }
+                                                            }
+                                                        }
+                                                        ?>
                                                         </ul>
                                                         <br/>
 
@@ -386,6 +461,63 @@ session_start();
 
                             </div>
 
+                        <div id="step-3" class="hidden">
+
+                            <!-- Start to do list -->
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>To Do List <small>Sample tasks</small></h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+
+                                        <div class="">
+                                            <ul class="to_do">
+                                                <?php
+                                                $perform_query=mysqli_query($con,"select m.Modules,t.Task,t.Tid,t.stat,m.Start_date,m.End_date from tasks t join modules m on t.Mid=m.Mid and t.Pid=m.Pid where m.Assigned_to='".$_SESSION["login_user"]."' and t.Pid='$Pid'");
+                                                while($perform_row=mysqli_fetch_assoc($perform_query))
+                                                {
+                                                ?>
+                                                    <div class="row">
+                                                    <div class="col-md-8">
+                                                        <?php
+                                                        if($perform_row['stat']==0)
+                                                             echo "<li>"."<p>"."<input type='checkbox' name='tasks_perform[]' value='".$perform_row["Tid"]."' class='flat notChecked'>"."  ".$perform_row["Task"]."</p>"."</li>";
+                                                        else
+                                                            echo "<li>"."<p>"."<input type='checkbox' name='tasks_perform[]' value='".$perform_row["Tid"]."' class='flat yesChecked' checked disabled='disabled'>"."  ".$perform_row["Task"]."</p>"."</li>";
+                                                        ?>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label>Start:</label>
+                                                          <?php echo $perform_row["Start_date"]?>
+                                                    </div>
+                                                     <div class="col-md-2">
+                                                         <label>End:</label>
+                                                         <?php echo $perform_row["End_date"]?>
+                                                     </div>
+                                                </div>
+                                                             <?php
+                                                    }
+                                                    ?>
+                                            </ul>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <div style="margin-bottom: 50px;"><button type="button" id="perform" style="position: absolute; left: 50%; margin-left: -50px;padding-top: 12px;padding-bottom: 12px; padding-left: 25px;padding-right: 25px;font-size: 18px;" class="btn btn-warning fa fa-tasks">&nbsp&nbspUpdate</button></div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+
+
+
 
                         </div>
 
@@ -405,25 +537,19 @@ session_start();
         </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="../../vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+                <script src="../../vendors/jquery/dist/jquery.min.js"></script>
+                <script src="../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
                 <script src="../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- FastClick -->
-    <script src="../../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../../vendors/nprogress/nprogress.js"></script>
-    <!-- ECharts -->
-    <script src="../../vendors/echarts/dist/echarts.min.js"></script>
+                <script src="../../vendors/fastclick/lib/fastclick.js"></script>
+                <script src="../../vendors/nprogress/nprogress.js"></script>
+                <script src="../../vendors/iCheck/icheck.min.js"></script>
+                <script src="../../vendors/echarts/dist/echarts.min.js"></script>
                 <script src="../../vendors/raphael/raphael.min.js"></script>
                 <script src="../../vendors/morris.js/morris.min.js"></script>
-                <!-- jQuery Smart Wizard -->
                 <script src="../../vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
 
-
-    <!-- Custom Theme Scripts -->
-    <script src="../../build/js/custom.min.js"></script>
+                <!-- Custom Theme Scripts -->
                 <script type="text/javascript">
                     var count=<?=$count ?>;
                     var count_1=<?=$count_1 ?>;
@@ -543,7 +669,7 @@ session_start();
                                 form_data.append("files[]", document.getElementById('multiFiles').files[x]);
                             }
                             $.ajax({
-                                url: 'uploads.php?Pid=<?= $Pid?>', // point to server-side PHP script
+                                url: 'uploads.php?Pid=<?=$Pid?>', // point to server-side PHP script
                                 dataType: 'text', // what to expect back from the PHP script
                                 cache: false,
                                 contentType: false,
@@ -575,9 +701,37 @@ session_start();
 
                     });
 
+                    $(document).on('click','#perform',function(){
+                        $.ajax({
+                            url: "update_tasks.php?Pid=<?= $Pid?>",
+                            method: "POST",
+                            dataType:"html",
+                            data:{task:$(".notChecked:checked").serialize()},
+                            success: function (data)
+                            {
+                                setTimeout(location.reload.bind(location), 2000);
+                                alert(data);
+                            }
+                        });
+
+                    });
+
+                        Morris.Bar({
+                            element:"graph_bar",
+                            data:[<?php echo $chart_data;?>],
+                            xkey:"module",
+                            ykeys:["percentage"],
+                            labels:["percentage"],
+                            barColors: ["#26B99A", "#34495E", "#ACADAC", "#3498DB"],
+                            xLabelAngle: 35,
+                            hideHover: "auto",
+                            resize: !0
+
+                        });
 
                 </script>
                 <script src="../js/saiteja.js"></script>
+                <script src="../../build/js/custom.min.js"></script>
 
     </body>
     </html>

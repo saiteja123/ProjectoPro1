@@ -1,6 +1,11 @@
 <?php
 require "init.php";
 session_start();
+$profile_query=mysqli_query($con,"select profile from user_info where Uname='".$_SESSION["login_user"]."'");
+while($profile_row=mysqli_fetch_assoc($profile_query))
+{
+    $profile=$profile_row["profile"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +47,7 @@ session_start();
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="../images/img.jpg" alt=""><span><?php echo $_SESSION["login_user"]; ?></span>
+                                <img src="../profiles/<?php echo $profile;?>" alt="Not Found" onerror=this.src="../images/alt_profile.png"><span><?php echo $_SESSION["login_user"]; ?></span>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -54,6 +59,46 @@ session_start();
                                 </li>
                                 <li><a href="javascript:;">Help</a></li>
                                 <li><a href="../Home/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                            </ul>
+                        </li>
+
+                        <?php
+                        $notify_query=mysqli_query($con,"select * from notifications where recepient='".$_SESSION["login_user"]."'");
+                        $notify_num=mysqli_num_rows($notify_query);
+                        ?>
+
+                        <li role="presentation" class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="badge bg-green"><?php echo $notify_num?></span>
+                            </a>
+
+                            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+
+                                <?php
+                                $k=$notify_num;
+                                while($k>$notify_num-3&&$notiify_row=mysqli_fetch_assoc($notify_query))
+                                {
+                                    ?>
+                                    <li>
+                                        <a>
+                                            <span><span>Sender:  </span><span><?php echo $notiify_row["sender"];?></span></span>
+                                            <span class="message"><?php echo $notiify_row["message"];?></span>
+                                        </a>
+                                    </li>
+
+                                    <?php
+                                    $k--;
+                                }
+                                ?>
+                                <li>
+                                    <div class="text-center">
+                                        <a>
+                                            <strong>See All Alerts</strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -84,7 +129,7 @@ session_start();
                             <li><a href="m_Projects.php"><i class="fa fa-edit"></i> Projects </a></li>
                             <li><a href="../Manager/m_calendar.php"><i class="fa fa-calendar"></i> Calendar </a></li>
                             <li><a><i class="fa fa-bug"></i> Bugs & Issues </a></li>
-                            <li><a><i class="fa fa-book"></i> Knowledge Base </a></li>
+                            <li><a href="m_knowledge_base.php"><i class="fa fa-book"></i> Knowledge Base </a></li>
                             <li><a href="../Manager/m_stake_holder.php"><i class="fa fa-users"></i> Stake Holders </a></li>
                         </ul>
                     </div>

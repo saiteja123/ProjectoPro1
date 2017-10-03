@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function() {
-    $('body').on("click", "#CreateProject1", function () {
+    $(document).on("click", "#CreateProject1", function () {
         $("div.cont").replaceWith("#CreateProject");
         $("div.desc").removeClass('hidden');
     });
@@ -123,14 +123,28 @@ $(document).ready(function() {
             data: {'Pid':Pid,'sender':sender,'choked':$('#tbody1>tr>td>input:checked').serialize(),'choked1':$('#tbody2>tr>td>input:checked').serialize(),'choked2':$('#tbody3>tr>td>input:checked').serialize()},
             success: function (data)
             {
-                $("div.members").replaceWith("<h3>Project created successfully</h3>");
-                setTimeout(location.reload.bind(location), 5000);
+                setTimeout(location.reload.bind(location), 2000);
                 alert(data);
             }
         });
 
 
     });
+
+        $(document).on('click','#delete_project',function(){
+            $.ajax({
+                url: "delete_project.php",
+                method: "POST",
+                dataType:"html",
+                data: {Pid:$("#delete_project").val()},
+                success: function (data)
+                {
+                    setTimeout(location.reload.bind(location), 2000);
+                    alert(data);
+                }
+            });
+
+        })
 
 
 });

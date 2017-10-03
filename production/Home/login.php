@@ -32,7 +32,7 @@ else if($desig=="employee")
 
 {
     $_SESSION['login_user']=$username;
-    redirect_to("Employee_Dashboard.php");
+    redirect_to("../Employee/Employee_Dashboard.php");
 }
 else
 redirect_to("error_Page.html");

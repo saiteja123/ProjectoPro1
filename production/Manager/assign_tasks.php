@@ -60,7 +60,7 @@ for($i=0;$i<$mod_count;$i++)
             $message="updated";
         }
         else
-            $message="".mysqli_error($con);
+            $message=" ".mysqli_error($con);
 
     }
 

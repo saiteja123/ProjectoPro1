@@ -41,15 +41,37 @@ function init_EasyPieChart() {
 }
 
 $(document).ready(function() {
-    $('.pane').on("click", "#Assign", function () {
-        $("#step-1").addClass("hidden");
-        $("#step-2").removeClass('hidden');
+    $("#Review").click(function () {
+        if ($("#step-2").is(":visible")) {
+            $("#step-2").addClass("hidden");
+        } else if ($("#step-3").is(":visible")) {
+            $("#step-3").addClass("hidden");
+        }
+        $("#step-1").removeClass("hidden");
+
     });
 
-    $('.pane').on("click", "#Review", function () {
-        $("#step-1").removeClass("hidden");
-        $("#step-2").addClass('hidden');
+    $("#Assign").click(function () {
+        if ($("#step-1").is(":visible")) {
+            $("#step-1").addClass("hidden");
+        } else if ($("#step-3").is(":visible")) {
+            $("#step-3").addClass("hidden");
+        }
+        $("#step-2").removeClass("hidden");
+
     });
+
+    $("#Perform").click(function () {
+        if ($("#step-1").is(":visible")) {
+            $("#step-1").addClass("hidden");
+        } else if ($("#step-2").is(":visible")) {
+            $("#step-2").addClass("hidden");
+        }
+        $("#step-3").removeClass("hidden");
+
+    });
+
+
 
 
 

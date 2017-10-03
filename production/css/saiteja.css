@@ -1,3 +1,8 @@
+.navbar
+{
+    background-image:url('../images/bg.png');
+}
+
 .banner {
     background-color: #2D9AB7;
     background-image: url(../images/bg.png);

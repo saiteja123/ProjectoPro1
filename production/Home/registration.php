@@ -27,7 +27,7 @@ session_start();
 </head>
 <body>
 <div class="container">
-<form class="well form-horizontal" action="validation.php" method="POST" id="contact_form">
+<form class="well form-horizontal" action="validation.php" method="POST" id="contact_form" enctype="multipart/form-data">
     <fieldset>
         <!-- Form Name -->
         <legend>
@@ -37,11 +37,12 @@ session_start();
         </legend>
         <br>
     </fieldset>
-
+<div class="row">
+    <div class="col-md-8">
         <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
             </label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="col-md-9 col-sm-9 col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="First Name <space> Last Name" required="required" type="text">
@@ -53,7 +54,7 @@ session_start();
         <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
             </label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="col-md-9 col-sm-9 col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                     <input type="email" id="email" placeholder="Email" name="email" required="required" class="form-control col-md-7 col-xs-12">
@@ -63,7 +64,7 @@ session_start();
 
     <div class="item form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender *</label>
-        <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="col-md-9 col-sm-9 col-xs-12">
         <p>
             M &nbsp
             <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required />&nbsp&nbsp&nbsp&nbsp&nbsp F &nbsp
@@ -75,7 +76,7 @@ session_start();
 
         <div class="item form-group">
             <label for="password" class="control-label col-md-3">Password *</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="col-md-9 col-sm-9 col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
                     <input id="password"  type="password"  name="password" placeholder="Password" data-validate-length-range="6,12" class="form-control col-md-7 col-xs-12" required="required">
@@ -86,7 +87,7 @@ session_start();
 
         <div class="item form-group">
             <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">Repeat Password *</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="col-md-9 col-sm-9 col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
                     <input id="password2" type="password" name="password2" placeholder="Confirm Password" data-validate-linked="password" class="form-control col-md-7 col-xs-12" required="required">
@@ -96,7 +97,7 @@ session_start();
 
         <div class="item form-group">
             <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">D.O.B *</label>
-            <div class="col-sm-4">
+            <div class="col-md-6 col-sm-4">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-birthday-cake"></i></span>
                     <input type='date' name="date" placeholder="Date of Birth" class="form-control" />
@@ -106,7 +107,7 @@ session_start();
 
     <div class="item form-group">
         <label  class="control-label col-md-3 col-sm-3 col-xs-12">Designation *</label>
-        <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="col-md-9 col-sm-9 col-xs-12">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-mortar-board"></i></span>
                 <select name="designation" class="form-control selectpicker">
@@ -121,7 +122,7 @@ session_start();
 
     <div class="item form-group">
         <label  class="control-label col-md-3 col-sm-3 col-xs-12">Department *</label>
-        <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="col-md-9 col-sm-9 col-xs-12">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-institution"></i></span>
                 <select name="department" class="form-control selectpicker">
@@ -134,21 +135,28 @@ session_start();
         </div>
     </div>
 
-
-
-
-
-
-        <div class="item form-group">
+    <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">Telephone <span class="required">*</span>
             </label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="col-md-9 col-sm-9 col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                     <input type="tel" id="telephone" name="phone" placeholder="Phone" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-3">
+        <div class="row">
+            <div style="height:250px;width:250px;margin-left: 50px;">
+                <img id="output" src="../images/profile.jpg" style="width:250px;height:250px;align-content:left; padding-right: 20px; " alt="Picture">
+            </div>
+            <div style="text-align: center">
+                    <input type="file" name="profile" onchange="loadFile(event)" style="margin-bottom: 10px;margin-top: 20px;margin-left: 75px;">
+            </div>
+        </div>
+    </div>
+</div>
 
         <div class="ln_solid"></div>
         <div class="form-group">
@@ -182,6 +190,15 @@ session_start();
     $('#myDatepicker2').datetimepicker({
         format: 'DD.MM.YYYY'
     });
+
+    var loadFile = function(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = document.getElementById('output');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
 </script>
 
 </body>
